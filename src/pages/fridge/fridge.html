@@ -1,0 +1,42 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Fridge</ion-title>
+    <ion-buttons end>
+      <button
+        *ngIf="!isLoggedIn()"
+        (click)="onLogin()"
+        ion-button icon-only>
+        <ion-icon name="person"></ion-icon>
+      </button>
+      <button
+        *ngIf="isLoggedIn()"
+        ion-button>
+        3€
+        <ion-icon name="euro"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card
+    *ngFor="let product of products">
+          <ion-card-header>
+              <ion-row>
+                  <ion-col col-10>
+                      {{product.name}}
+                  </ion-col>
+                  <ion-col col-2>
+                      <ion-badge>{{product.price}}€</ion-badge>                      
+                  </ion-col>
+                </ion-row>
+          </ion-card-header>
+          <ion-card-content>
+            {{product.description}}
+          </ion-card-content>
+        
+        </ion-card>
+</ion-content>

@@ -1,0 +1,44 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>My Profile</ion-title>
+    <ion-buttons end>
+      <button
+        *ngIf="user"
+        (click)="onLogout()"
+        ion-button icon-only>
+        <ion-icon name="ios-person-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+        <button
+          class="login-button"
+          *ngIf="!user"
+          (click)="onLogin()"
+          ion-button
+          block>
+          Login
+        </button>
+        <ion-list
+        *ngIf="user">
+            <ion-item>
+              <ion-avatar item-start>
+                <img class="avatar" src="{{user.photoURL}}">
+              </ion-avatar>
+              <h2>{{ user.displayName | overflow :20 }}</h2>
+              <p>{{ user.email  | overflow :30 }}</p>
+            </ion-item>
+
+            <!-- <ion-item *ngFor="let item of character['items']">
+              {{item.title}}
+              <ion-note item-end>
+                {{item.note}}
+              </ion-note>
+            </ion-item> -->
+        </ion-list>
+</ion-content>
