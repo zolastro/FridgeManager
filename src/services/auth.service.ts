@@ -44,7 +44,6 @@ export class AuthService {
   checkUser(user: User) {
     let usersRef = this.databaseService.getDataFrom('users/' + user.uid).subscribe(
       (obj) => {
-      console.log(obj);
       if (obj) {
         console.log("Welcome back!");
       } else {

@@ -22,21 +22,37 @@
 
 
 <ion-content padding>
-    <ion-card
+
+  <ion-list>
+    <ion-item-sliding 
     *ngFor="let product of products">
-          <ion-card-header>
-              <ion-row>
-                  <ion-col col-10>
-                      {{product.name}}
-                  </ion-col>
-                  <ion-col col-2>
-                      <ion-badge>{{product.price}}€</ion-badge>                      
-                  </ion-col>
-                </ion-row>
-          </ion-card-header>
-          <ion-card-content>
-            {{product.description}}
-          </ion-card-content>
-        
-        </ion-card>
+      <ion-item 
+      [navPush]="productPage"
+      [navParams]="product">
+        <h2>
+          <ion-row>
+            <ion-col col-10>
+              {{product.name}}
+            </ion-col>
+            <ion-col col-2>
+              <ion-badge>{{product.price}}€</ion-badge>
+            </ion-col>
+          </ion-row>
+        </h2>
+        <p>
+          {{product.description}}
+        </p>
+      </ion-item>
+
+        <ion-item-options side="right">
+          <button
+            (click)="buyProduct(product)"
+            ion-button icon-only color="secondary">
+            <ion-icon name="cash"></ion-icon>
+          </button>
+        </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
 </ion-content>

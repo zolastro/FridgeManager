@@ -6,6 +6,7 @@ import { environment } from '../enviroments/enviroment';
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { TabsPage } from '../pages/tabs/tabs';
+import { ProductPage } from '../pages/product/product';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,6 +19,7 @@ import {AngularFireAuthModule} from 'angularfire2/auth';
 import { ProductsService } from '../services/products.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { OverflowPipe } from '../pipes/overflow.pipe';
+import {BalanceService} from '../services/balance.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { OverflowPipe } from '../pipes/overflow.pipe';
     TabsPage,
     FridgePage,
     UserProfilePage,
-    OverflowPipe
+    OverflowPipe,
+    ProductPage
   ],
   imports: [
     BrowserModule,
@@ -41,13 +44,15 @@ import { OverflowPipe } from '../pipes/overflow.pipe';
     AboutPage,
     TabsPage,
     FridgePage,
-    UserProfilePage
+    UserProfilePage,
+    ProductPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AuthService,
     DatabaseService,
+    BalanceService,
     ProductsService,
     AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
