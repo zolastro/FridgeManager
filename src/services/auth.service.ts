@@ -33,21 +33,19 @@ export class AuthService {
     this.userSubject.next(this.user);
   }
 
-  getCurrentUserSubscription() {
+  getUserSubscription() {
     return this.userSubject;
   }
 
-  getCurrentUser() {
+  getUser() {
     return this.user;
   }
 
   checkUser(user: User) {
-    let usersRef = this.databaseService.getDataFrom('users/' + user.uid).subscribe(
+    this.databaseService.getDataFrom('users/' + user.uid).subscribe(
       (obj) => {
       if (obj) {
-        console.log("Welcome back!");
       } else {
-        console.log("New user");
         this.initializeUser(user);
       }
     });
@@ -56,4 +54,6 @@ export class AuthService {
   initializeUser(user: User) {
     this.databaseService.updateDataAt('users/' + user.uid , 'balance', 0);
   }
+
+
 }

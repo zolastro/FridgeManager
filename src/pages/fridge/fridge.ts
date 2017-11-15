@@ -14,6 +14,7 @@ import { ProductPage } from '../product/product';
 export class FridgePage implements OnInit{
   products = [];
   user: User;
+  money: number;
   productPage = ProductPage;
 
   constructor(
@@ -25,13 +26,20 @@ export class FridgePage implements OnInit{
   ) { }
 
   ngOnInit() {
-    this.user = this.authService.getCurrentUser();
-    this.authService.getCurrentUserSubscription().subscribe(
+    this.user = this.authService.getUser();
+    this.authService.getUserSubscription().subscribe(
       (user: User) => {
         this.user = user;
         //Get real money
+        this.balanceService.getBalance(user).subscribe(
+          (obj) =>  {
+            this.money = obj['balance'];
+          }
+        );
       }
     );
+
+
     this.products = this.productsService.getProducts();
   }
 

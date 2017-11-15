@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import {Subject} from 'rxjs/Subject';
 import {User} from 'firebase/app';
 @Component({
   selector: 'page-user-profile',
@@ -15,8 +14,8 @@ export class UserProfilePage implements OnInit{
   ) {}
 
   ngOnInit() {
-    this.user = this.authService.getCurrentUser();
-    this.authService.getCurrentUserSubscription().subscribe(
+    this.user = this.authService.getUser();
+    this.authService.getUserSubscription().subscribe(
       (user: User) => {
         this.user = user;
       }
@@ -29,9 +28,5 @@ export class UserProfilePage implements OnInit{
 
   onLogout() {
     this.authService.logout();
-  }
-
-  isLoggedIn() {
-    return this.user;
   }
 }

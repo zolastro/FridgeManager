@@ -6,8 +6,8 @@ import {Product} from '../models/product';
 
 @Injectable()
 export class BalanceService {
+
     constructor(
-        private authService: AuthService,
         private databaseSercice: DatabaseService
     ) {}
 
