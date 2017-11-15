@@ -12,7 +12,7 @@
       <button
         *ngIf="isLoggedIn()"
         ion-button>
-        {{ money }}€
+        {{ money?.toFixed(2) }}€
         <ion-icon name="euro"></ion-icon>
       </button>
     </ion-buttons>
@@ -35,7 +35,7 @@
               {{product.name}}
             </ion-col>
             <ion-col col-2>
-              <ion-badge>{{product.price}}€</ion-badge>
+              <ion-badge>{{ product.price?.toFixed(2) }}€</ion-badge>
             </ion-col>
           </ion-row>
         </h2>

@@ -80,7 +80,6 @@ export class FridgePage implements OnInit{
           text: 'Go ahead',
           handler: () => {
             this.balanceService.buyProduct(product, this.user);
-            console.log('Purchase Adquired');
           }
         }
       ]
