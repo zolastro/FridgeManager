@@ -31,11 +31,13 @@ export class FridgePage implements OnInit{
       (user: User) => {
         this.user = user;
         //Get real money
-        this.balanceService.getBalance(user).subscribe(
-          (obj) =>  {
-            this.money = obj['balance'];
-          }
-        );
+        if(user) {
+          this.balanceService.getBalance(user).subscribe(
+            (obj) =>  {
+              this.money = obj['balance'];
+            }
+          );
+        }
       }
     );
 
@@ -66,7 +68,6 @@ export class FridgePage implements OnInit{
   confirmPurchase(product: Product) {
     let confirm = this.alertCtrl.create({
       title: 'Do you want to buy' + product.name +'?',
-      message: 'Do you agree to use this lightsaber to do good across the intergalactic galaxy?',
       buttons: [
         {
           text: 'Cancel',

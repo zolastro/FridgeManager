@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import {User} from 'firebase/app';
+import {AlertController} from 'ionic-angular';
 @Component({
   selector: 'page-user-profile',
   templateUrl: 'user-profile.html',
@@ -10,7 +11,8 @@ export class UserProfilePage implements OnInit{
   user: User;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private alertCtrl: AlertController
   ) {}
 
   ngOnInit() {
@@ -27,6 +29,21 @@ export class UserProfilePage implements OnInit{
   }
 
   onLogout() {
-    this.authService.logout();
+      let confirm = this.alertCtrl.create({
+        title: 'Do you want to logout?',
+        buttons: [
+          {
+            text: 'No',
+            role:'cancel'
+          },
+          {
+            text: 'Yes',
+            handler: () => {
+              this.authService.logout();
+            }
+          }
+        ]
+      });
+      confirm.present();
   }
 }

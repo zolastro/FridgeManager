@@ -6,12 +6,13 @@ import {Subject} from 'rxjs/Subject';
 import {User} from 'firebase/app';
 
 import 'rxjs/add/operator/take';
-import 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
 
   userSubject: Subject<User> = new Subject<User>();
+  userData: Observable<any> = new Observable<any>();
   user: User;
   constructor(
     private firebaseAuth: AngularFireAuth,
@@ -24,6 +25,7 @@ export class AuthService {
         this.user = this.firebaseAuth.auth.currentUser;
         this.checkUser(this.user);
         this.userSubject.next(this.user);
+        this.userData = this.getUserData(this.user);
       }
     );
   }
@@ -42,7 +44,7 @@ export class AuthService {
   }
 
   checkUser(user: User) {
-    this.databaseService.getDataFrom('users/' + user.uid).subscribe(
+    this.getUserData(user).subscribe(
       (obj) => {
       if (obj) {
       } else {
@@ -53,6 +55,10 @@ export class AuthService {
 
   initializeUser(user: User) {
     this.databaseService.updateDataAt('users/' + user.uid , 'balance', 0);
+  }
+
+  getUserData(user: User) {
+    return this.databaseService.getDataFrom('users/' + user.uid);
   }
 
 
